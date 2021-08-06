@@ -380,19 +380,26 @@ namespace SM64MidiCompanion
             Process process = new Process();
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C" + cmd;
+            startInfo.FileName = "seq64_console.exe";
+            startInfo.Arguments = "--abi=sm64 --in=bin\\processed.mid --out=" + filename;
+            startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardInput = false;
             process.StartInfo = startInfo;
             
             // Grab output, will probably use this to log so people can see what went wrong in the future
             process.Start();
-            string strOutput = process.StandardOutput.ReadToEnd();
+
+            string output = process.StandardOutput.ReadToEnd();
+
+            using (StreamWriter file = new StreamWriter("bin\\logs.txt"))
+            {
+                file.WriteLine(output);
+            }
+
             process.WaitForExit();
 
             return;
-
-
         }
     }
 }
