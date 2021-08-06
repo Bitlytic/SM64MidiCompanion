@@ -53,3 +53,13 @@ If you are using LMMS, here's a couple tips I have
 `Edit -> Auto Assign Channels` will assign all enabled channels a separate ID, LMMS defaults all exported tracks to 0, which is stupid.
 
 If there's a channel called "Kicker" disable it, LMMS for some reason always exports this track even if it doesn't exist and it screws with your sm64.
+
+
+# Building
+If, for some reason, you wish to build this, it was built using `Visual Studio 2019` and has dependences on these NuGet packages:
+
+- [DryWetMidi](https://www.nuget.org/packages/Melanchall.DryWetMidi)
+- [Newtonsoft Json](https://www.newtonsoft.com/json)
+
+Additionally, `SEQ64` is not built nor included in the actual source, so you will need to download [SEQ64 v2.1](https://github.com/sauraen/seq64/releases/tag/2.1) 
+and either place SEQ64 in the build folder, or place the build .exe and .dll files into the SEQ64 folder.
