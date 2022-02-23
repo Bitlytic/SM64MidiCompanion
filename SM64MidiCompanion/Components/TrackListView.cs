@@ -48,6 +48,7 @@ namespace SM64MidiCompanion.Components
         public TrackListView()
         {
             OwnerDraw = true;
+            DoubleBuffered = true;
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, rowHeight);
             SmallImageList = imgList;
@@ -68,7 +69,13 @@ namespace SM64MidiCompanion.Components
                 item.SubItems.Add(track.name.ToString());
                 if (track.instrumentId >= 0)
                 {
-                    item.SubItems.Add(track.instrumentId.ToString());
+                    if (track.instrumentId != 127)
+                    {
+                        item.SubItems.Add(track.instrumentId.ToString());
+                    } else
+                    {
+                        item.SubItems.Add("PERC");
+                    }
                 }
                 else
                 {
@@ -108,8 +115,7 @@ namespace SM64MidiCompanion.Components
                 default:
                     break;
             }
-
-            LoadMidiItems();
+            Invalidate();
         }
 
         protected override void OnClick(EventArgs e)
@@ -122,10 +128,9 @@ namespace SM64MidiCompanion.Components
             {
                 case TrackColumn.Enabled:
                     tracks[itemIndex].enabled = !tracks[itemIndex].enabled;
+                    Invalidate();
                     break;
             }
-
-            LoadMidiItems();
         }
 
 
@@ -148,9 +153,8 @@ namespace SM64MidiCompanion.Components
             if (indexForm.ShowDialog(this) == DialogResult.OK)
             {
                 tracks[trackIndex].instrumentId = indexForm.instrumentId;
+                LoadMidiItems();
             }
-
-            LoadMidiItems();
         }
 
         public void UpdateTrackPitchShift(int trackIndex)
@@ -160,9 +164,8 @@ namespace SM64MidiCompanion.Components
             if (pitchShiftForm.ShowDialog(this) == DialogResult.OK)
             {
                 tracks[trackIndex].pitchShiftId = pitchShiftForm.pitchShift;
+                LoadMidiItems();
             }
-
-            LoadMidiItems();
         }
 
         public void UpdateTrackChannel(int trackIndex)
@@ -172,9 +175,8 @@ namespace SM64MidiCompanion.Components
             if(channelIndexForm.ShowDialog(this) == DialogResult.OK)
             {
                 tracks[trackIndex].channel = channelIndexForm.channelId;
+                LoadMidiItems();
             }
-
-            LoadMidiItems();
         }
 
 

@@ -30,15 +30,28 @@ namespace SM64MidiCompanion.Forms
 
             soundBank = Form1.LoadedSoundBank;
 
+            Dictionary<int, string> instDict = new Dictionary<int, string>();
+
             if (soundBank != null)
             {
                 errorLabel.Text = "";
                 instrumentComboBox.Items.Clear();
                 instruments = soundBank.GetInstruments().ToArray();
+
+                int instIndex = 0;
                 foreach (var inst in instruments)
                 {
-                    instrumentComboBox.Items.Add(inst.sound);
+                    instDict.Add(instIndex, inst.sound);
+                    instIndex++;
                 }
+                if (soundBank.hasPercussion)
+                {
+                    instDict.Add(127, "PERCUSSION");
+                }
+
+                instrumentComboBox.DataSource = instDict.ToList();
+                instrumentComboBox.ValueMember = "Value";
+                instrumentComboBox.DisplayMember = "Value";
             }
             else
             {
@@ -86,13 +99,19 @@ namespace SM64MidiCompanion.Forms
 
         private void instrumentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(instrumentComboBox.SelectedIndex < 0 || instrumentComboBox.SelectedIndex > instruments.Length)
+            if(instrumentComboBox.SelectedIndex < 0 || instrumentComboBox.SelectedIndex > instruments.Length + (soundBank.hasPercussion ? 1 : 0))
             {
                 return;
             }
-            Instrument inst = instruments[instrumentComboBox.SelectedIndex];
 
-            instrumentId = soundBank.GetInstrumentIndex(inst);
+            if (((KeyValuePair<int, string>)instrumentComboBox.SelectedItem).Key != 127)
+            {
+                Instrument inst = instruments[((KeyValuePair<int, string>)instrumentComboBox.SelectedItem).Key];
+                instrumentId = soundBank.GetInstrumentIndex(inst);
+            } else
+            {
+                instrumentId = 127;
+            }
 
             UpdateTextBoxValue();
         }
@@ -120,6 +139,14 @@ namespace SM64MidiCompanion.Forms
         {
             if (soundBank == null || instruments == null || instruments.Length == 0)
             {
+                return;
+            }
+
+            if (instrumentId == 127 && soundBank.hasPercussion)
+            {
+                instrumentComboBox.SelectedIndexChanged -= instrumentComboBox_SelectedIndexChanged;
+                instrumentComboBox.SelectedIndex = ((List<KeyValuePair<int, string>>)instrumentComboBox.DataSource).Count - 1;
+                instrumentComboBox.SelectedIndexChanged += instrumentComboBox_SelectedIndexChanged;
                 return;
             }
 

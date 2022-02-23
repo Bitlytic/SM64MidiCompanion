@@ -31,6 +31,7 @@ namespace SM64MidiCompanion.Classes
         public Dictionary<string, Instrument> filteredInstrumentMap = new Dictionary<string, Instrument>();
         [JsonProperty("instrument_list")]
         public string[] instrumentList;
+        public bool hasPercussion = false;
 
         public void FilterInstruments()
         {
@@ -38,10 +39,26 @@ namespace SM64MidiCompanion.Classes
             {
                 if (inst.Key.Equals("percussion"))
                 {
+                    hasPercussion = true;
                     continue;
                 }
 
-                Instrument instrument = JsonConvert.DeserializeObject<Instrument>(inst.Value.ToString());
+                dynamic deserialized = JsonConvert.DeserializeObject<dynamic>(inst.Value.ToString());
+
+                Instrument instrument = new Instrument();
+                instrument.releaseRate = deserialized.release_rate;
+                instrument.envelope = deserialized.envelope;
+                if (deserialized.sound.GetType() == typeof(Newtonsoft.Json.Linq.JObject))
+                {
+                    instrument.sound = deserialized.sound.sample;
+                } else if (deserialized.sound.GetType() == typeof(Newtonsoft.Json.Linq.JValue))
+                {
+                    instrument.sound = deserialized.sound;
+                } else
+                {
+                    instrument.sound = inst.Key;
+                }
+
                 filteredInstrumentMap.Add(inst.Key, instrument);
             }
         }
