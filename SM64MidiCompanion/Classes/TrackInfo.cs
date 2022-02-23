@@ -26,7 +26,8 @@ namespace SM64MidiCompanion.Components
                 }
                 else if (e is ProgramChangeEvent programChangeEvent)
                 {
-                    instrumentId = programChangeEvent.ProgramNumber;
+                    // Accounts for the drum channel, as per the General MIDI standard
+                    instrumentId = (programChangeEvent.Channel == 9) ? 127 : programChangeEvent.ProgramNumber;
                     channel = programChangeEvent.Channel;
                 }
             }

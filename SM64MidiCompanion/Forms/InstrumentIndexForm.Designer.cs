@@ -57,14 +57,19 @@ namespace SM64MidiCompanion.Forms
             // 
             this.instrumentIdTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.instrumentIdTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.instrumentIdTextBox.Location = new System.Drawing.Point(121, 46);
+            this.instrumentIdTextBox.Location = new System.Drawing.Point(115, 46);
+            this.instrumentIdTextBox.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
             this.instrumentIdTextBox.Minimum = new decimal(new int[] {
-            100,
+            1,
             0,
             0,
             -2147483648});
             this.instrumentIdTextBox.Name = "instrumentIdTextBox";
-            this.instrumentIdTextBox.Size = new System.Drawing.Size(48, 32);
+            this.instrumentIdTextBox.Size = new System.Drawing.Size(61, 32);
             this.instrumentIdTextBox.TabIndex = 2;
             this.instrumentIdTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.instrumentIdTextBox.ValueChanged += new System.EventHandler(this.instrumentIdTextBox_ValueChanged);
@@ -139,9 +144,7 @@ namespace SM64MidiCompanion.Forms
             // 
             // confirmButton
             // 
-            this.confirmButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.confirmButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.confirmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.confirmButton.Location = new System.Drawing.Point(160, 328);
             this.confirmButton.Name = "confirmButton";
@@ -153,9 +156,7 @@ namespace SM64MidiCompanion.Forms
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.cancelButton.Location = new System.Drawing.Point(12, 328);
             this.cancelButton.Name = "cancelButton";
