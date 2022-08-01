@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing;
 using SM64MidiCompanion.Forms;
-
+using System.ComponentModel;
 
 namespace SM64MidiCompanion.Components
 {
@@ -23,7 +23,7 @@ namespace SM64MidiCompanion.Components
 
     class TrackListView : ListView
     {
-        List<TrackInfo> tracks = new List<TrackInfo>();
+        private List<TrackInfo> tracks = new List<TrackInfo>();
 
         const int imageSize = 24;
         const int columnSize = 52;
@@ -31,6 +31,7 @@ namespace SM64MidiCompanion.Components
 
         Image checkedBox, unCheckedBox;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<TrackInfo> Tracks
         {
             get

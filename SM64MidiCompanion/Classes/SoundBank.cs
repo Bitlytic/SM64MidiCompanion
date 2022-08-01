@@ -79,7 +79,7 @@ namespace SM64MidiCompanion.Classes
 
         public int GetInstrumentIndex(Instrument inst)
         {
-            String name = "";
+            string name = "";
 
             foreach(var i in filteredInstrumentMap)
             {
@@ -100,7 +100,7 @@ namespace SM64MidiCompanion.Classes
                 return null;
             }
 
-            String name = instrumentList[i];
+            string name = instrumentList[i];
 
             foreach(var inst in filteredInstrumentMap)
             {

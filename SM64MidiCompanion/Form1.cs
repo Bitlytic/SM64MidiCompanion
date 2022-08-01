@@ -382,6 +382,10 @@ namespace SM64MidiCompanion
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "seq64_console.exe";
             startInfo.Arguments = "--abi=sm64 --in=bin\\processed.mid --out=" + filename;
+            if (flStudioCheckbox.Checked)
+            {
+                startInfo.Arguments += " --flstudio=true";
+            }
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardInput = false;

@@ -33,8 +33,7 @@ namespace SM64MidiCompanion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.midiInputTextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openMidiButton = new System.Windows.Forms.Button();
@@ -57,6 +56,7 @@ namespace SM64MidiCompanion
             this.soundBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoAssignChannelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flStudioCheckbox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,7 +179,7 @@ namespace SM64MidiCompanion
             this.trackNameListView.FullRowSelect = true;
             this.trackNameListView.HideSelection = false;
             this.trackNameListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.trackNameListView.Location = new System.Drawing.Point(347, 37);
             this.trackNameListView.Name = "trackNameListView";
             this.trackNameListView.OwnerDraw = true;
@@ -253,12 +253,24 @@ namespace SM64MidiCompanion
             this.autoAssignChannelsToolStripMenuItem.Text = "Auto Assign Channels";
             this.autoAssignChannelsToolStripMenuItem.Click += new System.EventHandler(this.autoAssignChannelsToolStripMenuItem_Click);
             // 
+            // flStudioCheckbox
+            // 
+            this.flStudioCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.flStudioCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.flStudioCheckbox.Location = new System.Drawing.Point(12, 351);
+            this.flStudioCheckbox.Name = "flStudioCheckbox";
+            this.flStudioCheckbox.Size = new System.Drawing.Size(314, 28);
+            this.flStudioCheckbox.TabIndex = 15;
+            this.flStudioCheckbox.Text = "FL Studio compat. mode";
+            this.flStudioCheckbox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.flStudioCheckbox);
             this.Controls.Add(this.saveM64Button);
             this.Controls.Add(this.outputM64TextBox);
             this.Controls.Add(this.saveErrorLabel);
@@ -305,6 +317,7 @@ namespace SM64MidiCompanion
         private System.Windows.Forms.ToolStripMenuItem soundBankToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoAssignChannelsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox flStudioCheckbox;
     }
 }
 

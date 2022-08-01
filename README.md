@@ -61,5 +61,5 @@ If, for some reason, you wish to build this, it was built using `Visual Studio 2
 - [DryWetMidi](https://www.nuget.org/packages/Melanchall.DryWetMidi)
 - [Newtonsoft Json](https://www.newtonsoft.com/json)
 
-Additionally, `SEQ64` is not built nor included in the actual source, so you will need to download [SEQ64 v2.1](https://github.com/sauraen/seq64/releases/tag/2.1) 
+Additionally, `SEQ64` is not built nor included in the actual source, so you will need to download [SEQ64 v2.1.4](https://github.com/sauraen/seq64/releases/tag/2.1.4) 
 and either place SEQ64 in the build folder, or place the build .exe and .dll files into the SEQ64 folder.
