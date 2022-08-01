@@ -330,6 +330,15 @@ namespace SM64MidiCompanion
                     {
                         continue;
                     }
+                    else if (e is ControlChangeEvent controlChangeEvent)
+                    {
+                        if (controlChangeEvent.ControlNumber != ControlName.BankSelect.AsSevenBitNumber() ||
+                            controlChangeEvent.ControlNumber != ControlName.LsbForBankSelect.AsSevenBitNumber())
+                        {
+                            newTrack.Events.Add(controlChangeEvent);
+                        }
+                        continue;
+                    }
                     else if (e is ChannelEvent channelEvent)
                     {
                         channelEvent.Channel = (FourBitNumber)trackInfo.channel;
