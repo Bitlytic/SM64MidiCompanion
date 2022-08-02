@@ -330,6 +330,30 @@ namespace SM64MidiCompanion
                     {
                         continue;
                     }
+                    else if (e is ControlChangeEvent controlChangeEvent)
+                    {
+                        if (controlChangeEvent.ControlNumber != ControlName.BankSelect.AsSevenBitNumber() ||
+                            controlChangeEvent.ControlNumber != ControlName.LsbForBankSelect.AsSevenBitNumber())
+                        {
+                            newTrack.Events.Add(controlChangeEvent);
+                        }
+                        continue;
+                    }
+                    else if (e is PitchBendEvent pitchBendEvent)
+                    {
+                        newTrack.Events.Add(pitchBendEvent);
+                        continue;
+                    }
+                    else if (e is MetaEvent metaEvent)
+                    {
+                        if (metaEvent.EventType == MidiEventType.Marker ||
+                            metaEvent.EventType == MidiEventType.NormalSysEx ||
+                            metaEvent.EventType == MidiEventType.SetTempo)
+                        {
+                            newTrack.Events.Add(metaEvent);
+                        }
+                        continue;
+                    }
                     else if (e is ChannelEvent channelEvent)
                     {
                         channelEvent.Channel = (FourBitNumber)trackInfo.channel;
@@ -382,6 +406,10 @@ namespace SM64MidiCompanion
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "seq64_console.exe";
             startInfo.Arguments = "--abi=sm64 --in=bin\\processed.mid --out=" + filename;
+            if (flStudioCheckbox.Checked)
+            {
+                startInfo.Arguments += " --flstudio=true";
+            }
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardInput = false;

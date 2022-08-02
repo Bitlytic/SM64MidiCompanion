@@ -9,7 +9,7 @@ namespace SM64MidiCompanion.Components
 {
     class TrackInfo
     {
-        public String name = "Unnamed Track";
+        public string name = "Unnamed Track";
         public bool enabled = true;
         public int instrumentId = -1;
         public int pitchShiftId = 0;
