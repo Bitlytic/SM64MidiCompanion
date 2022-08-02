@@ -339,6 +339,11 @@ namespace SM64MidiCompanion
                         }
                         continue;
                     }
+                    else if (e is PitchBendEvent pitchBendEvent)
+                    {
+                        newTrack.Events.Add(pitchBendEvent);
+                        continue;
+                    }
                     else if (e is MetaEvent metaEvent)
                     {
                         if (metaEvent.EventType == MidiEventType.Marker ||
