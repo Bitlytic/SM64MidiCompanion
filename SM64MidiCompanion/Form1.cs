@@ -339,6 +339,16 @@ namespace SM64MidiCompanion
                         }
                         continue;
                     }
+                    else if (e is MetaEvent metaEvent)
+                    {
+                        if (metaEvent.EventType == MidiEventType.Marker ||
+                            metaEvent.EventType == MidiEventType.NormalSysEx ||
+                            metaEvent.EventType == MidiEventType.SetTempo)
+                        {
+                            newTrack.Events.Add(metaEvent);
+                        }
+                        continue;
+                    }
                     else if (e is ChannelEvent channelEvent)
                     {
                         channelEvent.Channel = (FourBitNumber)trackInfo.channel;
